@@ -1,18 +1,15 @@
 import mysql.connector
-from mysql.connector import connect, Error
+from mysql.connector import Error
 
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Derilee#1"
+)
+
+mycursor = mydb.cursor()
 try:
-    with connect(
-      host="localhost",
-      user="root",
-      password="Derilee#1"
-    ) as connection:
-      create_new_db = "alx_book_store"
-      with connection.cursor() as cursor:
-        cursor.execute(create_new_db)
-        print(f"Database '{create_new_db}' created successfully!")
-
+    mycursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+    print("Database 'alx_book_store' created successfully!")
 except Error as e:
-  print(e)
-create_new_db.open()
-create_new_db.close()
+    print(e)
